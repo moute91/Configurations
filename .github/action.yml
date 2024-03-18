@@ -1,0 +1,47 @@
+name: "Deploy"
+description: "Deploy PDK configurations"
+
+inputs:
+    BRAND_PATH:
+        required: true
+        type: string
+    BRAND_HOST:
+        required: true
+        type: string
+    DATA_API_URL:
+        required: true
+        type: string
+    MAUTH_APP_ID:
+        required: true
+        type: string
+    MAUTH_PRIVATE_KEY:
+        required: true
+        type: string
+    V3_API_URL:
+        required: true
+        type: string
+
+
+
+runs:
+    using: "composite"
+    steps:
+        - name: "Checkout code"
+          uses: actions/checkout@v3
+        - name: "Set up Python"
+          uses: actions/setup-python@v5
+          with:
+            python-version: "3.11"
+            cache: "pip"
+        - name: "Install dependencies"
+          run: pip install -r requirements.txt
+          shell: bash
+        - name: "Deploy"
+          run: bin/deploy.py "${{ inputs.BRAND_PATH }}" "${{ inputs.BRAND_HOST }}"
+          shell: bash
+          env:
+              DATA_API_URL: ${{ inputs.DATA_API_URL }}
+              MAUTH_APP_ID: ${{ inputs.MAUTH_APP_ID }}
+              MAUTH_PRIVATE_KEY: ${{ inputs.MAUTH_PRIVATE_KEY }}
+              V3_API_URL: ${{ inputs.V3_API_URL }}
+

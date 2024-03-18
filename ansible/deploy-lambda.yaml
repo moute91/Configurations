@@ -1,0 +1,30 @@
+---
+# Ansible playbook for deploying the Lambda to publish pdk configurations.
+#
+# - name: "Creation of PDK Config Lambda"
+#   hosts: localhost
+#     connection: local
+#       gather_facts: false
+#
+#         tasks:
+#             - name: "CloudFormation Stack for the PDK Config Lambda"
+#                   cloudformation:
+#                           stack_name: "pdk-config-deploy-{{ envName }}-lambda"
+#                                   state: present
+#                                           disable_rollback: true
+#                                                   template: ../cloudformation/pdkconfig-lambda.yaml
+#                                                           template_parameters:
+#                                                                     envName: "{{ envName }}"
+#                                                                               codeVersion: "{{ codeVersion }}"
+#                                                                                         gatewayS3Bucket: "{{ gatewayS3Bucket }}"
+#                                                                                                   v3ApiUrl: "{{ v3ApiUrl }}"
+#                                                                                                             dataApiUrl: "{{ dataApiUrl }}"
+#                                                                                                                       clientId: "{{ clientId }}"
+#                                                                                                                                 baseUI: "{{ baseUI }}"
+#                                                                                                                                           mauthAppUuid: "{{ mauthAppUuid }}"
+#                                                                                                                                                     mauthPrivateKey: "{{ mauthPrivateKey }}"
+#                                                                                                                                                           register: pdkconfig_lambda_cf_stack_output
+#
+#                                                                                                                                                               - name: "Output of the CloudFormation Stack for the PDK Config Lambda"
+#                                                                                                                                                                     debug:
+#                                                                                                                                                                             msg: "{{ pdkconfig_lambda_cf_stack_output }}"

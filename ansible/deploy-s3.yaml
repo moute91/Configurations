@@ -1,0 +1,21 @@
+---
+
+- name: "Ansible Playbook for creating the S3 bucket for pdk configs"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: "CloudFormation Stack for the pdk configs S3 bucket"
+      cloudformation:
+        stack_name: "pdk-configs-{{ envName }}-s3-bucket"
+        state: present
+        disable_rollback: true
+        template: ../cloudformation/pdkconfig-s3.yaml
+        template_parameters:
+          envName: "{{ envName }}"
+      register: pdk_configs_s3_cf_stack_output
+
+    - name: "Output of the CloudFormation Stack for the pdk configs S3 bucket"
+      debug:
+        msg: "{{ pdk_configs_s3_cf_stack_output }}"

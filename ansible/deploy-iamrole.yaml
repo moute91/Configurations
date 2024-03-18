@@ -1,0 +1,23 @@
+---
+# Ansible playbook for creating the IAM role
+#
+# - name: "Creation of the IAM role"
+#   hosts: localhost
+#     connection: local
+#       gather_facts: false
+#
+#         tasks:
+#             - name: "The CloudFormation Stack for the pdk configs IAM role"
+#                   cloudformation:
+#                           stack_name: "pdk-config-deploy-{{ envName }}-role"
+#                                   state: present
+#                                           disable_rollback: true
+#                                                   template: ../cloudformation/pdkconfig-iamrole.yaml
+#                                                           template_parameters:
+#                                                                     envName: "{{ envName }}"
+#                                                                               gatewayBucketName: "{{ gatewayBucketName }}"
+#                                                                                     register: iamrole_cf_stack_output
+#
+#                                                                                         - name: "Output of the CloudFormation Stack for the IAM role"
+#                                                                                               debug:
+#                                                                                                       msg: "{{ iamrole_cf_stack_output }}"
